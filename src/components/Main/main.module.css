@@ -1,0 +1,89 @@
+.main {
+    background-image: radial-gradient(circle at top left, #551f1e, #0c0a15 40%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* images */
+
+.img_decency_compire_wr {
+    width: 40%;
+    height: 30%;
+}
+
+.img_feedback {
+    width: 70%;
+    height: 35%;
+}
+
+.img_decencyReport {
+    width: 60%;
+    height: 60%;
+}
+
+.img_skill_bracket {
+    width: 30%;
+    height: 20%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.img_centered {
+    display: block;
+    margin: 0 auto;
+
+}
+
+.img_templarAssassin {
+    width: 100%;
+    height: 100%;
+}
+
+.container_decency_report {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.containerCompareWr {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    gap: 50px;
+    padding-bottom: 40px;
+}
+
+.compare_wr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skill_bracket_container {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navBtn {
+    color: rgba(192, 197, 199, 0.885);
+    background-color: inherit;
+    border: none;
+    font-size: 20px;
+}
+
+.navBtn:hover {
+    color: rgba(213, 213, 14, 0.952);
+}
+
+.listTitle {
+    align-self: start;
+}
+
+.page_title {
+    align-self: center;
+}
