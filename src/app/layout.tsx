@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={fira_code.className}>
       <head>
-        <title>Guide of True Sight</title>
+        <title>Guide of the True Sight</title>
         {/* <meta name="google-site-verification" content="google060f7d62aa9de722" /> */}
         <meta name="description" content="Dota 2. Про скрытый пул" />
         <meta name="keywords" content="Дота 2, скрытый пул, тильт, порядочность, Dota 2, hidden pool, tilt, decency" />

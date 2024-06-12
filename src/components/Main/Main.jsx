@@ -37,15 +37,15 @@ export default function Main() {
                     </ul>
                 </nav>
                 <section ref={refSectionGameSelectionSystem} className="section">
-                    <h3 className={s.h3}>Система подбора игр</h3>
+                    <h2 className={s.h2}>Система подбора игр</h2>
                     <p>
                         Система ищет игроков <mark >в одну игру</mark> с примерно равными рангами и общей порядочностью.
                         Однако, подбор игроков <mark >в команду</mark> отталкивается от дополнительных показателей: <mark className='weakMarker'>локальной порядочности</mark> и <mark className='weakMarker'>skill bracket</mark>.
                     </p>
                 </section>
                 <section ref={refSectionDecency} className="section">
-                    <h3 className={s.h3}>Порядочность</h3>
-                    <h4 className={s.listTitle}>Порядочность делится на два вида:</h4>
+                    <h2 className={s.h2}>Порядочность</h2>
+                    <h3 className={s.listTitle}>Порядочность делится на два вида:</h3>
                     <ul>
                         <li className="li_first_level">общая(долгосрочная)</li>
                         <li className="li_first_level">локальная(кратковременная)</li>
@@ -59,7 +59,7 @@ export default function Main() {
                     <p>
                         Игрок, имеющий низкую локальную порядочность отсортировывается <mark >в команду</mark>, с низкой локальной порядочностью при подборе игр, и скорей всего, обречен на серию поражений(lose streak).
                     </p>
-                    <h4 className={s.listTitle}>Признаки понижения локальной порядочности:</h4>
+                    <h3 className={s.listTitle}>Признаки понижения локальной порядочности:</h3>
                     <ul>
                         <li>долгий поиск игры;</li>
                         <li>отказы найденной игры;</li>
@@ -90,7 +90,7 @@ export default function Main() {
                         <figcaption className="mediumMarker">
                             Отчет общей порядочности приходит каждые 15 игр:
                         </figcaption>
-                        <Image src={img_decencyReport} className={`${s.img_decencyReport} ${s.img_centered}`} alt="img_decencyReport" />
+                        <Image src={img_decencyReport} className={`${s.img_decencyReport} ${s.img_centered}`} alt="decency report" />
                     </figure>
                     <mark className="mediumMarker">
                         Локальная порядочность работает в течении 15 игр между отчетами общей порядочности.
@@ -106,19 +106,19 @@ export default function Main() {
                             <figcaption>
                                 В матче двух команд с низкой лок. порядочностью шанс победить примерно 50%,<br /> в остальных случаях шанс &lt; 50%.
                             </figcaption>
-                            <Image src={img_decency_compare_wr_low} className={s.img_decency_compire_wr} alt="low" />
+                            <Image src={img_decency_compare_wr_low} className={s.img_decency_compire_wr} alt="comparative of win ratings, where low decency loses normal and high decency" />
                         </figure>
                         <figure className={s.compare_wr}>
                             <figcaption>
                                 В матче двух команд с средней лок. порядочностью шанс победить примерно 50%,<br /> против команды с низкой лок. порядочностью шанс победить &gt; 50%,<br /> против команды с высокой лок. порядочностью шанс победить &lt; 50%
                             </figcaption>
-                            <Image src={img_decency_compare_wr_norm} className={s.img_decency_compire_wr} alt="norm" />
+                            <Image src={img_decency_compare_wr_norm} className={s.img_decency_compire_wr} alt="comparative of win ratings, where normal decency beats low, but loses normal decency" />
                         </figure>
                         <figure className={s.compare_wr}>
                             <figcaption>
                                 В матче двух команд с высокой лок. порядочностью шанс победить примерно 50%,<br /> в остальных случаях шанс &gt; 50%.
                             </figcaption>
-                            <Image src={img_decency_compare_wr_high} className={s.img_decency_compire_wr} alt="high" />
+                            <Image src={img_decency_compare_wr_high} className={s.img_decency_compire_wr} alt="comparative of win ratings, where high decency beats low and normal decency" />
                         </figure>
                     </div>
                     <p>
@@ -140,15 +140,15 @@ export default function Main() {
                     </p>
                 </section >
                 <section ref={refSectionSkillBracket} className="section">
-                    <h3 className={s.h3}>Skill bracket</h3>
+                    <h2 className={s.h2}>Skill bracket</h2>
                     <p>
                         Аналогично тому, как порядочность разделена на общую и временную, skill разделен на общий(рейтинг MMR) и временный(skill bracket). Показатель &quot;skill bracket&quot; можно посмотреть на сайте dotabuff:
                     </p>
 
                     <figure className={s.skill_bracket_container}>
-                        <Image src={img_skill_bracket} className={`${s.img_skill_bracket} ${s.img_centered}`} alt="img_skill_bracket" />
+                        <Image src={img_skill_bracket} className={`${s.img_skill_bracket} ${s.img_centered}`} alt="skill bracket" />
                         <figcaption>
-                            <h4 className={s.listTitle}>Есть три уровня skill bracket:</h4>
+                            <h3 className={s.listTitle}>Есть три уровня skill bracket:</h3>
                             <ul>
                                 <li>Normal Skill</li>
                                 <li>High Skill</li>
@@ -159,7 +159,7 @@ export default function Main() {
                     <p>
                         Это условное выражение показателя, которое базируется на числах, скрытых &quot;под капотом&quot;. Он быстро меняется от результатов предыдущего матча и влияет на подбор игроков в следующем. <mark>Skill bracket растет при высоких показателях партии</mark>.
                     </p>
-                    <h4>Показатели партии вычисляются в зависимости от:</h4>
+                    <h3>Показатели партии вычисляются в зависимости от:</h3>
                     <ul>
                         <li>KDA(kills/dies/assists);</li>
                         <li>GPM(gold per minute);</li>
@@ -180,13 +180,13 @@ export default function Main() {
                     <p>
                         Аналогично, <mark>skill bracket падает при низких показателях партии</mark>.
                     </p>
-                    <h4>Можно подчеркнуть то, что:</h4>
+                    <h3>Можно подчеркнуть то, что:</h3>
                     <ul>
                         <li>при вычислении skill bracket<span className='reduceMarker'>-а</span>, <mark >показатели за матч считаются относительно союзников</mark>(но не относительно противников). Например, если игрок набил 100к урона(вроде бы много), но союзник набил 200к, то skill bracket игрока падает, а если игрок набил 10к урона(вроде бы мало), но союзник 5к, то skill bracket игрока растет. Показатели противников тут не важны. В докаллибровочных играх часто можно встретить абузеров skill bracket, т.к. он напрямую влияет на получение высокого рейтинга после каллибровки. Например, неуместное лечение по кд Ораклом, ульт Зевса по кд, напрасное поглощение урона в соло хардером вдали от команды и т.д. Правда, такой вариант не сулит победы, и как правило, замечается другими игроками и пресекается репортами, а в последствии испорченной порядочностью.</li>
                         <li>skill bracket <mark >не различает роли</mark>, т.е. 30к урона на суппорте и 30к урона на carry будут рассматриваться одинаково, это означает что идеально отыгранная партия за суппорта без большого потенциала маг урона, например, за Treant Protector или Chen будет понижать уровень skill bracket.</li>
                         <li>игрокам с одной команды skill bracket начисляется <mark >индивидуально</mark>, т.е. с одного матча игроки получат разный результат skill bracket, как правило, роли основы получают высше.</li>
                     </ul>
-                    <h4 className={s.listTitle}>Признаки понижения показателя skill bracket:</h4>
+                    <h3 className={s.listTitle}>Признаки понижения показателя skill bracket:</h3>
                     <ul>
                         <li>на стадии выбора персонажей, игроки пытаются избегать своих ролей на позициях 3 и 5, например, 5<span className='reduceMarker'>-ка</span>  выбирает Magnus<span className='reduceMarker'>-а</span>, а 3<span className='reduceMarker'>-ка</span> Windranger, от чего в команде нет вардера и хардера;</li>
                         <li>суммарный урон carry в конце матча в разы меньше чем урон 5<span className='reduceMarker'>-ки</span>;</li>
@@ -196,7 +196,7 @@ export default function Main() {
                     </ul>
                 </section>
                 <section ref={refSectionReports} className="section">
-                    <h3 className={s.h3}>Про репорты</h3>
+                    <h2 className={s.h2}>Про репорты</h2>
                     <p>
                         В Dota2 подавляющая часть репортов обрабатываются автоматически, а процесс регулирования взаимоотношений - управляется самими игроками, образовывая своего рода игравую анархию. Репорты складируются в аккаунте игрока, а при достижении определенного количества, активируется система &quot;наказания&quot;. Разработчики игры создали такие условия, где репорты допускаются как от союзников, так и от противников. Автоматическое начисление репортов не обрабатывается должным образом, т.е. репорт может быть зачислен за чат, даже если игрок отключил все виды чата и не сказал/написал ни одного слова за весь матч. Также репорт может быть зачислен за препятствование игры, даже если игрок имеет идеальные показатели за матч и получил звание MVP(Most Valuable Player). Все это не проверяется и репорт слепо зачисляется.
                     </p>
@@ -207,7 +207,7 @@ export default function Main() {
                     <p>
                         Некоторые репорты не отображаются в отчете порядочности и не влияют на общую порядочность, однако они влияют на локальную порядочность.
                     </p>
-                    <h4 className={s.listTitle}>Союзники могут кинуть репорты за:</h4>
+                    <h3 className={s.listTitle}>Союзники могут кинуть репорты за:</h3>
                     <ul>
                         <li className="li_first_level">злоупотребление способностей;</li>
                         <li className="li_first_level">разбивание вещей;</li>
@@ -228,7 +228,7 @@ export default function Main() {
                             </ul>
                         </li>
                     </ul>
-                    <h4 className={s.listTitle}>Противники могут кинуть репорты за:</h4>
+                    <h3 className={s.listTitle}>Противники могут кинуть репорты за:</h3>
                     <ul>
                         <li className="li_first_level">свое поражение(особенно тому кто явно выделился):
                             <ul>
@@ -259,11 +259,11 @@ export default function Main() {
                     </p>
                 </section>
                 <section ref={refSectionСonclusion} className="section">
-                    <h3 className={s.h3}>Вывод</h3>
+                    <h2 className={s.h2}>Вывод</h2>
                     <p>
                         Тильт кроется в падении локальной порядочности и показателя &quot;skill bracket&quot; в той или инной пропорции. Они тесно переплетены, т.е. снижение одного показателя тянет за собой другой. Чтобы не попадать в тильт или выйти с него нужно не получать репорты и делать хорошие результаты матча. Правильно входить в новый цикл локальной порядочности, т.е. считать 15 матчей после отчета(отчет приходит не сразу, а через пару минут после 15<span className='reduceMarker'>-ой</span> игры).
                     </p>
-                    <h4 className={s.listTitle}>Для избежания понижения локальной порядочности:</h4>
+                    <h3 className={s.listTitle}>Для избежания понижения локальной порядочности:</h3>
                     <ul>
                         <li>отключить голосовой и текстовый чат;</li>
                         <li>ненавязчиво пользоваться колесом чата и колесом сигналов;</li>
@@ -276,7 +276,7 @@ export default function Main() {
                     </p>
                     <figure>
                         <figcaption className="mediumMarker">Тайна раскрыта! Используй с умом...</figcaption>
-                        <Image src={img_templarAssassin} className={s.img_templarAssassin} alt="img_templarAssassin" />
+                        <Image src={img_templarAssassin} className={s.img_templarAssassin} alt="Templar Assassin" />
                     </figure>
                 </section>
             </div >
