@@ -1,0 +1,16 @@
+{
+    "name": "Guide of the true sight",
+    "short_name": "Dota",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#6f3325",
+    "theme_color": "#6f3325",
+    "description": "mechanics of Dota 2",
+    "icons": [
+        {
+            "src": "manifest_icon.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        }
+    ]
+}
