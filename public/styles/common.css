@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -7,6 +11,10 @@ body {
     box-sizing: border-box;
     min-width: 360px;
     max-width: 1600px;
+}
+
+a {
+    text-decoration: none;
 }
 
 mark {

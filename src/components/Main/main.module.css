@@ -69,14 +69,14 @@
     align-items: center;
 }
 
-.navBtn {
+.title_internal_link {
     color: rgba(192, 197, 199, 0.885);
     background-color: inherit;
     border: none;
     font-size: 20px;
 }
 
-.navBtn:hover {
+.title_internal_link:hover {
     color: rgba(213, 213, 14, 0.952);
 }
 
