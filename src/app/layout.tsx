@@ -29,7 +29,7 @@ export default function RootLayout({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         {/* <meta property="og:image" content="src/components/Header/img/title_Omniknight.png" /> */}
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="https://dota-seven.vercel.app/favicon.ico" />
         <meta property="og:image:width" content="1366" />
         <meta property="og:image:height" content="768" />
       </head>
