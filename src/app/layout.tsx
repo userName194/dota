@@ -24,13 +24,13 @@ export default function RootLayout({
         <meta name="description" content={description} />
         <meta name="keywords" content="Дота 2, скрытый пул, тильт, порядочность, Dota 2, hidden pool, tilt, decency" />
         {/* Open Graph meta tags */}
+        <meta property="og:site_name" content={title} />
+        <meta property="og:url" content={process.env.SITE_URL} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={process.env.SITE_URL} />
-        <meta property="og:image" content="../components/Header/img/title_Omniknight.png" />
-        <meta property="og:image:width" content="64" />
-        <meta property="og:image:height" content="64" />
-        <meta property="og:site_name" content={title} />
+        <meta property="og:image" content="src/components/Header/img/title_Omniknight.png" />
+        <meta property="og:image:width" content="1366" />
+        <meta property="og:image:height" content="768" />
       </head>
       <body>
         {children}
