@@ -12,16 +12,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const title = "Guide of the True Sight";
+  const description = "Dota 2. Про скрытый пул";
   return (
     <html lang="ru" className={fira_code.className}>
       <head>
-        <title>Guide of the True Sight</title>
+        <title>{title}</title>
         <meta name="google-site-verification" content="google060f7d62aa9de722" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Dota 2. Про скрытый пул" />
+        <meta name="description" content={description} />
         <meta name="keywords" content="Дота 2, скрытый пул, тильт, порядочность, Dota 2, hidden pool, tilt, decency" />
-        <link rel="preload" href="../components/Header/img/title_Omniknight.png" as="image"></link>
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={process.env.SITE_URL} />
+        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image:width" content="64" />
+        <meta property="og:image:height" content="64" />
+        <meta property="og:site_name" content={title} />
       </head>
       <body>
         {children}
