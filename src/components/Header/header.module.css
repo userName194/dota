@@ -2,8 +2,8 @@
     display: flex;
 }
 
-.background_Omni {
+.title_Omniknight {
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 0%;
 }

@@ -21,6 +21,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Dota 2. Про скрытый пул" />
         <meta name="keywords" content="Дота 2, скрытый пул, тильт, порядочность, Dota 2, hidden pool, tilt, decency" />
+        <link rel="preload" href="../components/Header/img/title_Omniknight.png" as="image"></link>
       </head>
       <body>
         {children}
