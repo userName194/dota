@@ -27,7 +27,7 @@ export default function RootLayout({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={process.env.SITE_URL} />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="../../public/favicon.ico" />
         <meta property="og:image:width" content="64" />
         <meta property="og:image:height" content="64" />
         <meta property="og:site_name" content={title} />
