@@ -1,3 +1,4 @@
+"use client";
 import s from "./main.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +9,7 @@ import img_decency_compare_wr_low from "./img/decency_compare_wr/compare_wr_low.
 import img_decency_compare_wr_norm from "./img/decency_compare_wr/compare_wr_norm.png"
 import img_decency_compare_wr_high from "./img/decency_compare_wr/compare_wr_high.png"
 import img_templarAssassin from "./img/templarAssassin.jpg"
+
 export default function Main() {
     return (
         <div className={s.main}>
@@ -20,21 +22,21 @@ export default function Main() {
                 </section>
                 <nav>
                     <ul>
-                        <li className="li_first_level"><Link href="#gameSelectionSystemSection" className={s.title_internal_link}>Система подбора игр</Link></li>
-                        <li className="li_first_level"><Link href="#decencySection" className={s.title_internal_link}>Порядочность</Link></li>
-                        <li className="li_first_level"><Link href="#skillBracketSection" className={s.title_internal_link}>Skill bracket</Link></li>
-                        <li className="li_first_level"><Link href="#reportsSection" className={s.title_internal_link}>Про репорты</Link></li>
-                        <li className="li_first_level"><Link href="#conclusionSection" className={s.title_internal_link}>Вывод</Link></li>
+                        <li className="li_first_level"><Link href="#gameSelectionSystem" className={s.title_internal_link}>Система подбора игр</Link></li>
+                        <li className="li_first_level"><Link href="#decency" className={s.title_internal_link}>Порядочность</Link></li>
+                        <li className="li_first_level"><Link href="#skillBracket" className={s.title_internal_link}>Skill bracket</Link></li>
+                        <li className="li_first_level"><Link href="#reports" className={s.title_internal_link}>Про репорты</Link></li>
+                        <li className="li_first_level"><Link href="#conclusion" className={s.title_internal_link}>Вывод</Link></li>
                     </ul>
                 </nav>
-                <section id="gameSelectionSystemSection" className="section">
+                <section id="gameSelectionSystem" className="section">
                     <h2 className={s.h2}>Система подбора игр</h2>
                     <p>
                         Система ищет игроков <mark >в одну игру</mark> с примерно равными рангами и общей порядочностью.
                         Однако, подбор игроков <mark >в команду</mark> отталкивается от дополнительных показателей: <mark className='weakMarker'>локальной порядочности</mark> и <mark className='weakMarker'>skill bracket</mark>.
                     </p>
                 </section>
-                <section id="decencySection" className="section">
+                <section id="decency" className="section">
                     <h2 className={s.h2}>Порядочность</h2>
                     <h3 className={s.listTitle}>Порядочность делится на два вида:</h3>
                     <ul>
@@ -130,7 +132,7 @@ export default function Main() {
                         Как бы не развернулась партия, даже при сильном преимуществе противника, когда carry и близко не может подойти к вражеским героям, support сможет нанести урон сдалека в то время, когда противник будет сносить здания, ведь для победы обязательным условием является разрушение Древнего(Ancient). В таком случае, support оценивается системой выше, от чего в следующей игре будут подобраны более сильные союзники, с которыми уже можно попробовать сыграть на других ролях.
                     </p>
                 </section >
-                <section id="skillBracketSection" className="section">
+                <section id="skillBracket" className="section">
                     <h2 className={s.h2}>Skill bracket</h2>
                     <p>
                         Аналогично тому, как порядочность разделена на общую и временную, skill разделен на общий(рейтинг MMR) и временный(skill bracket). Показатель &quot;skill bracket&quot; можно посмотреть на сайте dotabuff:
@@ -186,7 +188,7 @@ export default function Main() {
                         <li>союзники всю игру разбросаны по карте или наоборот слишком частые сражения неполным составом и т.д.</li>
                     </ul>
                 </section>
-                <section id="reportsSection" className="section">
+                <section id="reports" className="section">
                     <h2 className={s.h2}>Про репорты</h2>
                     <p>
                         В Dota2 подавляющая часть репортов обрабатываются автоматически, а процесс регулирования взаимоотношений - управляется самими игроками, образовывая своего рода игравую анархию. Репорты складируются в аккаунте игрока, а при достижении определенного количества, активируется система &quot;наказания&quot;. Разработчики игры создали такие условия, где репорты допускаются как от союзников, так и от противников. Автоматическое начисление репортов не обрабатывается должным образом, т.е. репорт может быть зачислен за чат, даже если игрок отключил все виды чата и не сказал/написал ни одного слова за весь матч. Также репорт может быть зачислен за препятствование игры, даже если игрок имеет идеальные показатели за матч и получил звание MVP(Most Valuable Player). Все это не проверяется и репорт слепо зачисляется.
@@ -249,7 +251,7 @@ export default function Main() {
                         Большая часть репортов от команды противника необъективная, т.е. можно оправдать получение репорта за умышленные смерти, но часто бывает так, что игрок кидает репорт банально из обиды(человеческий фактор).
                     </p>
                 </section>
-                <section id="conclusionSection" className="section">
+                <section id="conclusion" className="section">
                     <h2 className={s.h2}>Вывод</h2>
                     <p>
                         Тильт кроется в падении локальной порядочности и показателя &quot;skill bracket&quot; в той или инной пропорции. Они тесно переплетены, т.е. снижение одного показателя тянет за собой другой. Чтобы не попадать в тильт или выйти с него нужно не получать репорты и делать хорошие результаты матча. Правильно входить в новый цикл локальной порядочности, т.е. считать 15 матчей после отчета(отчет приходит не сразу, а через пару минут после 15<span className='reduceMarker'>-ой</span> игры).
