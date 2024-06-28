@@ -1,19 +1,14 @@
-
 import { Fira_Code } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from 'next/script';
+import { CommonJS } from "../components/Сommon.js";
 
 const fira_code = Fira_Code({
   subsets: ['latin'],
   display: 'swap',
 })
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
   const title = "Guide of the True Sight";
   const description = "Dota 2. Про скрытый пул";
   return (
@@ -38,6 +33,7 @@ export default function RootLayout({
         {children}
         <Analytics />
         <SpeedInsights />
+        <CommonJS />
       </body>
     </html>
   )

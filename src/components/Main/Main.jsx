@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from 'react';
 import s from "./main.module.css";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,11 +23,11 @@ export default function Main() {
                 </section>
                 <nav>
                     <ul>
-                        <li className="li_first_level"><Link href="#gameSelectionSystem" className={s.title_internal_link}>Система подбора игр</Link></li>
-                        <li className="li_first_level"><Link href="#decency" className={s.title_internal_link}>Порядочность</Link></li>
-                        <li className="li_first_level"><Link href="#skillBracket" className={s.title_internal_link}>Skill bracket</Link></li>
-                        <li className="li_first_level"><Link href="#reports" className={s.title_internal_link}>Про репорты</Link></li>
-                        <li className="li_first_level"><Link href="#conclusion" className={s.title_internal_link}>Вывод</Link></li>
+                        <li className="li_first_level"><a href="#gameSelectionSystem" className={s.title_internal_link}>Система подбора игр</a></li>
+                        <li className="li_first_level"><a href="#decency" className={s.title_internal_link}>Порядочность</a></li>
+                        <li className="li_first_level"><a href="#skillBracket" className={s.title_internal_link}>Skill bracket</a></li>
+                        <li className="li_first_level"><a href="#reports" className={s.title_internal_link}>Про репорты</a></li>
+                        <li className="li_first_level"><a href="#conclusion" className={s.title_internal_link}>Вывод</a></li>
                     </ul>
                 </nav>
                 <section id="gameSelectionSystem" className="section">
