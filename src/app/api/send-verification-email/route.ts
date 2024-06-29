@@ -2,7 +2,10 @@ import { PrismaClient } from '@prisma/client';
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+    log: ['query', 'info', 'warn', 'error'],
+});
+
 const brevoSmtpUser = process.env.BREVO_SMTP_USER;
 const brevoSmtpPass = process.env.BREVO_SMTP_PASS;
 const brevoSmtpHost = process.env.BREVO_SMTP_HOST;
@@ -27,6 +30,7 @@ export async function POST(req: Request) {
         const code = generateVerificationCode();
         console.log('Generated code:', code);
 
+        console.log('Attempting to store code in database');
         await prisma.verificationCode.create({
             data: {
                 email,
