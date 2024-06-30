@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "prisma:generate": "prisma generate",
-    "build": "npm run prisma:generate && next build",
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "build": "npm run prisma:generate && npm run migrate:deploy && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"
