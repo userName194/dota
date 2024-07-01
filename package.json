@@ -8,7 +8,7 @@
     "prisma:generate": "prisma generate",
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
-    "build": "npm run prisma:generate && npm run migrate:deploy && next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"
