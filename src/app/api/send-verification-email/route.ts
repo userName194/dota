@@ -1,31 +1,41 @@
-import nodemailer from 'nodemailer';
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const verificationCodes = new Map(); // Временное хранилище для верификационных кодов
+const verificationCodes = new Map<string, string>();
 
-async function sendVerificationEmail(email: string) {
-    const code = uuidv4().split('-')[0]; // Генерация короткого уникального кода
+export async function POST(req: NextRequest) {
+    const { email } = await req.json();
 
-    // Отправка email с помощью Brevo или другого сервиса
-    const transporter = nodemailer.createTransport({
-        service: 'Brevo', // Настроить под нужный сервис
-        auth: {
-            user: process.env.BREVO_USER,
-            pass: process.env.BREVO_PASSWORD,
-        },
-    });
+    if (!email) {
+        return NextResponse.json({ message: 'Email is required' }, { status: 400 });
+    }
 
-    const mailOptions = {
-        from: 'your-email@example.com',
-        to: email,
+    const code = uuidv4().split('-')[0];
+
+    const data = {
+        sender: { email: process.env.BREVO_SMTP_USER, name: 'Your Company Name' },
+        to: [{ email: email }],
         subject: 'Verification Code',
-        text: `Your verification code is ${code}`,
+        htmlContent: `<p>Your verification code is ${code}</p>`,
     };
 
-    await transporter.sendMail(mailOptions);
+    try {
+        const response = await axios.post('https://api.brevo.com/v3/smtp/email', data, {
+            headers: {
+                'api-key': process.env.BREVO_API_KEY,
+                'Content-Type': 'application/json',
+            },
+        });
 
-    // Сохранение кода в временном хранилище
-    verificationCodes.set(email, code);
-
-    console.log(`Verification code ${code} sent to ${email}`);
+        if (response.status === 201) {
+            verificationCodes.set(email, code);
+            return NextResponse.json({ message: 'Verification email sent successfully!' });
+        } else {
+            return NextResponse.json({ message: 'Failed to send verification email' }, { status: 500 });
+        }
+    } catch (error) {
+        console.error('Error sending email:', error as Error);
+        return NextResponse.json({ message: 'Error sending verification email', error: error.message }, { status: 500 });
+    }
 }
