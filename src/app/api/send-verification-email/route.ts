@@ -34,14 +34,12 @@ export async function POST(req: NextRequest) {
         } else {
             return NextResponse.json({ message: 'Failed to send verification email' }, { status: 500 });
         }
-    } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-            console.error('Error sending email:', error.message);
+    } catch (error) {
+        console.error('Error sending email:', error);
+        if (error instanceof Error) {
             return NextResponse.json({ message: 'Error sending verification email', error: error.message }, { status: 500 });
         } else {
-            const err = error as Error;
-            console.error('Unexpected error:', err);
-            return NextResponse.json({ message: 'Unexpected error occurred', error: err.message }, { status: 500 });
+            return NextResponse.json({ message: 'Unknown error', error: String(error) }, { status: 500 });
         }
     }
 }
