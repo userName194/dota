@@ -34,8 +34,13 @@ export async function POST(req: NextRequest) {
         } else {
             return NextResponse.json({ message: 'Failed to send verification email' }, { status: 500 });
         }
-    } catch (error: any) {
-        console.error('Error sending email:', error);
-        return NextResponse.json({ message: 'Error sending verification email', error: error.message }, { status: 500 });
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error('Error sending email:', error.message);
+            return NextResponse.json({ message: 'Error sending verification email', error: error.message }, { status: 500 });
+        } else {
+            console.error('Unexpected error:', error);
+            return NextResponse.json({ message: 'Unexpected error occurred', error: (error as Error).message }, { status: 500 });
+        }
     }
 }
