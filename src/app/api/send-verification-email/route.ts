@@ -36,7 +36,10 @@ export async function POST(req: NextRequest) {
         }
     } catch (error) {
         console.error('Error sending email:', error);
-        const errorMessage = (error as Error).message || 'Unknown error';
-        return NextResponse.json({ message: 'Error sending verification email', error: errorMessage }, { status: 500 });
+        if (error instanceof Error) {
+            return NextResponse.json({ message: 'Error sending verification email', error: error.message }, { status: 500 });
+        } else {
+            return NextResponse.json({ message: 'Unknown error', error: String(error) }, { status: 500 });
+        }
     }
 }
