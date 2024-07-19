@@ -6,16 +6,15 @@ interface VerifyRecaptchaResponse {
     message?: string;
 }
 
-export async function POST(req: NextRequest, res: NextResponse<VerifyRecaptchaResponse>) {
-    const { captchaToken } = await req.json();
-    const projectID = process.env.GOOGLE_CLOUD_PROJECT_ID;
-    const recaptchaKey = process.env.NEXT_PUBLIC_DOTA_CAPTCHA_ID;
-
-    console.log("Received Captcha Token:", captchaToken);
+export async function POST(req: NextRequest) {
+    const { captchaToken } = await req.json() as { captchaToken: string };
 
     if (!captchaToken) {
         return NextResponse.json({ success: false, message: 'Captcha token is required' }, { status: 400 });
     }
+
+    const projectID = process.env.GOOGLE_CLOUD_PROJECT_ID!;
+    const recaptchaKey = process.env.NEXT_PUBLIC_DOTA_CAPTCHA_ID!;
 
     const client = new RecaptchaEnterpriseServiceClient();
     const projectPath = client.projectPath(projectID);
@@ -32,23 +31,20 @@ export async function POST(req: NextRequest, res: NextResponse<VerifyRecaptchaRe
 
     try {
         const [response] = await client.createAssessment(request);
-        console.log("reCAPTCHA Verification Response:", response);
+
+        // Ensure response and response.tokenProperties are defined
+        if (!response || !response.tokenProperties) {
+            return NextResponse.json({ success: false, message: 'No token properties found in response' }, { status: 400 });
+        }
 
         if (!response.tokenProperties.valid) {
-            console.log(`The CreateAssessment call failed because the token was: ${response.tokenProperties.invalidReason}`);
-            return NextResponse.json({ success: false, message: 'Captcha verification failed' }, { status: 400 });
+            return NextResponse.json({ success: false, message: `Invalid captcha token: ${response.tokenProperties.invalidReason}` }, { status: 400 });
         }
 
         if (response.tokenProperties.action === 'LOGIN') {
-            console.log(`The reCAPTCHA score is: ${response.riskAnalysis.score}`);
-            response.riskAnalysis.reasons.forEach((reason) => {
-                console.log(reason);
-            });
-
             return NextResponse.json({ success: true, message: 'Captcha verification successful' }, { status: 200 });
         } else {
-            console.log("The action attribute in your reCAPTCHA tag does not match the action you are expecting to score");
-            return NextResponse.json({ success: false, message: 'Captcha verification failed' }, { status: 400 });
+            return NextResponse.json({ success: false, message: 'Invalid action' }, { status: 400 });
         }
     } catch (error) {
         console.error('Error during reCAPTCHA verification:', error);
