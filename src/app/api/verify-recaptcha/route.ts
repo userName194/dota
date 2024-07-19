@@ -1,19 +1,16 @@
-// dota/src/app/api/verify-recaptcha/route.ts
-import { NextApiRequest, NextApiResponse } from 'next';
+// src/app/api/verify-recaptcha/route.ts
+import { NextRequest, NextResponse } from 'next/server';
 
 interface VerifyRecaptchaResponse {
     success: boolean;
     message?: string;
 }
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<VerifyRecaptchaResponse>
-) {
-    const { captchaToken } = req.body;
+export async function POST(req: NextRequest) {
+    const { captchaToken } = await req.json();
 
     if (!captchaToken) {
-        return res.status(400).json({ success: false, message: 'Captcha token is required' });
+        return NextResponse.json({ success: false, message: 'Captcha token is required' }, { status: 400 });
     }
 
     const secretKey = process.env.NEXT_PUBLIC_DOTA_CAPTCHA_ID;
@@ -28,8 +25,8 @@ export default async function handler(
     const data = await response.json();
 
     if (!data.success) {
-        return res.status(400).json({ success: false, message: 'Captcha verification failed' });
+        return NextResponse.json({ success: false, message: 'Captcha verification failed' }, { status: 400 });
     }
 
-    res.status(200).json({ success: true, message: 'Captcha verification successful' });
+    return NextResponse.json({ success: true, message: 'Captcha verification successful' }, { status: 200 });
 }
