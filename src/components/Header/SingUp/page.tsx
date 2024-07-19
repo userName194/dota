@@ -1,4 +1,3 @@
-//dota/src/components/Header/SingUp/page.tsx
 "use client";
 import React, { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -7,11 +6,13 @@ import s from "./signUp.module.css";
 export default function SignUp() {
     const [message, setMessage] = useState<string>('');
     const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-    const siteKey = process.env.NEXT_PUBLIC_DOTA_CAPTCHA_ID;
-    console.log("siteKey", siteKey);
+    const captchaSecret = process.env.NEXT_PUBLIC_DOTA_CAPTCHA_ID;
+
+    console.log("captchaSecret", captchaSecret);
 
     const handleCaptchaChange = (token: string | null) => {
         setCaptchaToken(token);
+        console.log("Captcha Token:", token);
     };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,6 +33,7 @@ export default function SignUp() {
             });
 
             const data = await response.json();
+            console.log("Verification Response Data:", data);
 
             if (data.success) {
                 setMessage('Registration successful!');
@@ -39,6 +41,7 @@ export default function SignUp() {
                 setMessage('Captcha verification failed. Please try again.');
             }
         } catch (error) {
+            console.error('Error during registration:', error);
             setMessage('An error occurred during registration.');
         }
     };
@@ -52,7 +55,7 @@ export default function SignUp() {
                     <input id="email" type="email" required />
                 </div>
                 <ReCAPTCHA
-                    sitekey={siteKey as string}
+                    sitekey={captchaSecret!}
                     onChange={handleCaptchaChange}
                 />
                 <button type="submit">Register</button>
