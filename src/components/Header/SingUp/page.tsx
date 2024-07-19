@@ -1,90 +1,63 @@
+//dota/src/components/Header/SingUp/page.tsx
 "use client";
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
-import * as yup from 'yup';
+import ReCAPTCHA from 'react-google-recaptcha';
 import s from "./signUp.module.css";
 
-interface IFormInput {
-    email: string;
-}
-
-interface IVerifyInput {
-    email: string;
-    code: string;
-}
-
-const schema = yup.object().shape({
-    email: yup.string().email('Invalid email').required('Email is required')
-});
-
-const verifySchema = yup.object().shape({
-    email: yup.string().email('Invalid email').required('Email is required'),
-    code: yup.string().required('Verification code is required'),
-});
-
 export default function SignUp() {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
-        resolver: yupResolver(schema)
-    });
+    const [message, setMessage] = useState<string>('');
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+    const siteKey = process.env.NEXT_PUBLIC_DOTA_CAPTCHA_ID;
+    console.log("siteKey", siteKey);
 
-    const { register: registerVerify, handleSubmit: handleVerifySubmit, formState: { errors: verifyErrors } } = useForm<IVerifyInput>({
-        resolver: yupResolver(verifySchema)
-    });
-
-    const [message, setMessage] = useState('');
-    const [verifyMessage, setVerifyMessage] = useState('');
-
-    const onSubmit: SubmitHandler<IFormInput> = async data => {
-        try {
-            const response = await axios.post('/api/send-verification-email', data);
-            if (response.status === 200) {
-                setMessage('Verification email sent successfully!');
-            } else {
-                setMessage(`Error: ${response.data.message}`);
-            }
-        } catch (error) {
-            setMessage('An error occurred while sending the verification email.');
-        }
+    const handleCaptchaChange = (token: string | null) => {
+        setCaptchaToken(token);
     };
 
-    const onVerifySubmit: SubmitHandler<IVerifyInput> = async data => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (!captchaToken) {
+            setMessage('Please complete the reCAPTCHA');
+            return;
+        }
+
         try {
-            const response = await axios.post('/api/verify-email', data);
-            if (response.status === 200) {
-                setVerifyMessage('Email verified and added to database!');
+            const response = await fetch('/api/verify-recaptcha', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ captchaToken }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setMessage('Registration successful!');
             } else {
-                setVerifyMessage(`Error: ${response.data.message}`);
+                setMessage('Captcha verification failed. Please try again.');
             }
         } catch (error) {
-            setVerifyMessage('An error occurred while verifying the email.');
+            setMessage('An error occurred during registration.');
         }
     };
 
     return (
         <div>
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input id="email" type="email" {...register('email')} />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    <input id="email" type="email" required />
                 </div>
-                <button type="submit">Send Verification Code</button>
+                <ReCAPTCHA
+                    sitekey={siteKey as string}
+                    onChange={handleCaptchaChange}
+                />
+                <button type="submit">Register</button>
             </form>
             {message && <p>{message}</p>}
-
-            <h2>Verify Email</h2>
-            <form onSubmit={handleVerifySubmit(onVerifySubmit)}>
-                <div>
-                    <label htmlFor="code">Verification Code</label>
-                    <input id="code" type="text" {...registerVerify('code')} />
-                    {verifyErrors.code && <p>{verifyErrors.code.message}</p>}
-                </div>
-                <button type="submit">Verify Email</button>
-            </form>
-            {verifyMessage && <p>{verifyMessage}</p>}
         </div>
     );
-};
+}
